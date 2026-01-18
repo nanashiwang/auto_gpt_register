@@ -5,6 +5,7 @@ from datetime import datetime
 import asyncio
 from app.models.schemas import RegistrationTask, AccountModel, RegistrationStatus
 from app.services.excel_service import ExcelService
+from app.services.mail_tm_client import MailTmClient
 from app.core.registration import RegistrationStateMachine, RegistrationContext
 from app.core.browser import BrowserService
 from app.core.captcha_solver import CaptchaFactory
@@ -41,7 +42,22 @@ async def execute_single_account(
         注册状态
     """
     browser = None
+    temp_mail_client = None
+    temp_mail_account = None
+    signup_email = account.gpt_email or account.email
     try:
+        if settings.REGISTRATION_MODE == "openai_email" and settings.EMAIL_PROVIDER.lower() == "mailtm":
+            temp_mail_client = MailTmClient(
+                base_url=settings.MAIL_TM_BASE_URL,
+                timeout=settings.EMAIL_API_TIMEOUT
+            )
+            temp_mail_account = await temp_mail_client.create_account(
+                page=settings.MAIL_TM_DOMAIN_PAGE
+            )
+            signup_email = temp_mail_account.address
+            account.gpt_email = signup_email
+            logger.info(f"账号 {account.email} 使用临时邮箱注册: {signup_email}")
+
         # 创建浏览器服务
         browser = BrowserService(headless=settings.HEADLESS_MODE)
 
@@ -49,9 +65,12 @@ async def execute_single_account(
         context = RegistrationContext(
             email=account.email,
             password=account.password,
+            signup_email=signup_email,
             browser=browser,
             captcha_solver=captcha_solver,
             proxy_manager=proxy_manager,
+            temp_mail_client=temp_mail_client,
+            temp_mail_account=temp_mail_account,
             task_id=task_id,
             max_retries=settings.MAX_RETRY_COUNT,
             log_callback=lambda level, msg: manager.send_log(
@@ -79,6 +98,11 @@ async def execute_single_account(
         if browser:
             try:
                 await browser.close()
+            except:
+                pass
+        if temp_mail_client:
+            try:
+                await temp_mail_client.close()
             except:
                 pass
 
@@ -156,7 +180,8 @@ async def execute_registration(
                 await excel_service.update_account_status(
                     account.email,
                     status,
-                    None if status == RegistrationStatus.SUCCESS else "注册失败"
+                    None if status == RegistrationStatus.SUCCESS else "注册失败",
+                    gpt_email=account.gpt_email
                 )
 
                 # 发送进度更新

@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=D:\工作\忙\python_code\自动注册gpt账号\.venv
+set VIRTUAL_ENV=d:\code_python\auto_gpt_register\.venv
 
 if not defined PROMPT set PROMPT=$P$G
 

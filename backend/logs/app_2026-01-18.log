@@ -1,0 +1,196 @@
+2026-01-18 03:58:50 | INFO     | app.utils.logger:setup_logger:65 | 日志系统初始化完成,日志级别: INFO
+2026-01-18 03:58:51 | INFO     | app.services.crypto_service:_setup_cipher:43 | 加密服务初始化成功
+2026-01-18 03:58:51 | INFO     | app.services.crypto_service:_setup_cipher:43 | 加密服务初始化成功
+2026-01-18 03:58:51 | INFO     | app.services.crypto_service:_setup_cipher:43 | 加密服务初始化成功
+2026-01-18 03:58:51 | INFO     | app.main:startup_event:39 | ==================================================
+2026-01-18 03:58:51 | INFO     | app.main:startup_event:40 | GPT Auto Register v1.0.0 启动中...
+2026-01-18 03:58:51 | INFO     | app.main:startup_event:41 | ==================================================
+2026-01-18 03:58:51 | INFO     | app.main:startup_event:48 | 数据目录: ./data
+2026-01-18 03:58:51 | INFO     | app.main:startup_event:49 | 日志目录: ./logs
+2026-01-18 03:58:51 | INFO     | app.main:startup_event:50 | 截图目录: ./screenshots
+2026-01-18 03:58:51 | INFO     | app.main:startup_event:51 | 账号文件: ./data/accounts.xlsx
+2026-01-18 03:58:51 | INFO     | app.services.crypto_service:_setup_cipher:43 | 加密服务初始化成功
+2026-01-18 03:58:51 | WARNING  | app.main:startup_event:59 | 账号文件不存在: ./data/accounts.xlsx
+2026-01-18 03:58:51 | INFO     | app.main:startup_event:60 | 请通过 API 导入账号或手动创建 Excel 文件
+2026-01-18 03:58:51 | INFO     | app.main:startup_event:65 | ==================================================
+2026-01-18 03:58:51 | INFO     | app.main:startup_event:66 | 应用启动完成!
+2026-01-18 03:58:51 | INFO     | app.main:startup_event:67 | API 文档: http://localhost:8000/docs
+2026-01-18 03:58:51 | INFO     | app.main:startup_event:68 | ==================================================
+2026-01-18 04:09:13 | INFO     | app.utils.logger:setup_logger:65 | 日志系统初始化完成,日志级别: INFO
+2026-01-18 04:09:13 | INFO     | app.services.crypto_service:_setup_cipher:43 | 加密服务初始化成功
+2026-01-18 04:09:13 | INFO     | app.services.crypto_service:_setup_cipher:43 | 加密服务初始化成功
+2026-01-18 04:09:13 | WARNING  | app.services.excel_service:load_accounts:62 | Excel 文件不存在: ./data/accounts.xlsx
+2026-01-18 04:09:13 | ERROR    | app.services.excel_service:save_accounts:185 | 保存 Excel 失败: 'str' object has no attribute 'value'
+2026-01-18 04:09:51 | INFO     | app.utils.logger:setup_logger:65 | 日志系统初始化完成,日志级别: INFO
+2026-01-18 04:09:51 | INFO     | app.services.crypto_service:_setup_cipher:43 | 加密服务初始化成功
+2026-01-18 04:09:51 | INFO     | app.services.crypto_service:_setup_cipher:43 | 加密服务初始化成功
+2026-01-18 04:09:51 | WARNING  | app.services.excel_service:load_accounts:62 | Excel 文件不存在: ./data/accounts.xlsx
+2026-01-18 04:09:51 | INFO     | app.services.excel_service:save_accounts:187 | 保存 1 个账号到 Excel: ./data/accounts.xlsx
+2026-01-18 04:09:52 | INFO     | app.services.mail_tm_client:create_account:92 | 创建临时邮箱成功: umhrwyqhr71@virgilian.com
+2026-01-18 04:09:52 | INFO     | app.api.routes.registration:execute_single_account:59 | 账号 local_20260118040951@example.com 使用临时邮箱注册: umhrwyqhr71@virgilian.com
+2026-01-18 04:09:52 | INFO     | app.core.registration:log:52 | [local_20260118040951@example.com] 执行状态: init
+2026-01-18 04:09:52 | WARNING  | app.core.proxy_manager:get_proxy:66 | 没有可用代理
+2026-01-18 04:09:53 | ERROR    | app.core.browser:start:86 | 浏览器启动失败: Executable doesn't exist at C:\Users\29877\AppData\Local\ms-playwright\chromium-1091\chrome-win\chrome.exe
+╔════════════════════════════════════════════════════════════╗
+║ Looks like Playwright was just installed or updated.       ║
+║ Please run the following command to download new browsers: ║
+║                                                            ║
+║     playwright install                                     ║
+║                                                            ║
+║ <3 Playwright Team                                         ║
+╚════════════════════════════════════════════════════════════╝
+2026-01-18 04:09:53 | INFO     | app.core.registration:execute:104 | [local_20260118040951@example.com] 状态转换: RegistrationState.INIT -> RegistrationState.RETRY
+2026-01-18 04:09:53 | INFO     | app.core.registration:log:52 | [local_20260118040951@example.com] 执行状态: retry
+2026-01-18 04:09:53 | INFO     | app.core.registration:log:52 | [local_20260118040951@example.com] 重试 1/3
+2026-01-18 04:09:58 | INFO     | app.core.registration:execute:104 | [local_20260118040951@example.com] 状态转换: RegistrationState.RETRY -> RegistrationState.LOAD_PAGE
+2026-01-18 04:09:58 | INFO     | app.core.registration:log:52 | [local_20260118040951@example.com] 执行状态: load_page
+2026-01-18 04:09:58 | INFO     | app.core.registration:log:52 | [local_20260118040951@example.com] 加载页面失败: 浏览器上下文未初始化,请先调用 start() 方法
+2026-01-18 04:09:58 | INFO     | app.core.registration:execute:104 | [local_20260118040951@example.com] 状态转换: RegistrationState.LOAD_PAGE -> RegistrationState.RETRY
+2026-01-18 04:09:58 | INFO     | app.core.registration:log:52 | [local_20260118040951@example.com] 执行状态: retry
+2026-01-18 04:09:58 | INFO     | app.core.registration:log:52 | [local_20260118040951@example.com] 重试 2/3
+2026-01-18 04:10:03 | INFO     | app.core.registration:execute:104 | [local_20260118040951@example.com] 状态转换: RegistrationState.RETRY -> RegistrationState.LOAD_PAGE
+2026-01-18 04:10:03 | INFO     | app.core.registration:log:52 | [local_20260118040951@example.com] 执行状态: load_page
+2026-01-18 04:10:03 | INFO     | app.core.registration:log:52 | [local_20260118040951@example.com] 加载页面失败: 浏览器上下文未初始化,请先调用 start() 方法
+2026-01-18 04:10:03 | INFO     | app.core.registration:execute:104 | [local_20260118040951@example.com] 状态转换: RegistrationState.LOAD_PAGE -> RegistrationState.RETRY
+2026-01-18 04:10:03 | INFO     | app.core.registration:log:52 | [local_20260118040951@example.com] 执行状态: retry
+2026-01-18 04:10:03 | INFO     | app.core.registration:log:52 | [local_20260118040951@example.com] 重试 3/3
+2026-01-18 04:10:08 | INFO     | app.core.registration:execute:104 | [local_20260118040951@example.com] 状态转换: RegistrationState.RETRY -> RegistrationState.LOAD_PAGE
+2026-01-18 04:10:08 | INFO     | app.core.registration:log:52 | [local_20260118040951@example.com] 执行状态: load_page
+2026-01-18 04:10:08 | INFO     | app.core.registration:log:52 | [local_20260118040951@example.com] 加载页面失败: 浏览器上下文未初始化,请先调用 start() 方法
+2026-01-18 04:10:08 | INFO     | app.core.registration:execute:104 | [local_20260118040951@example.com] 状态转换: RegistrationState.LOAD_PAGE -> RegistrationState.RETRY
+2026-01-18 04:10:08 | INFO     | app.core.registration:log:52 | [local_20260118040951@example.com] 执行状态: retry
+2026-01-18 04:10:08 | INFO     | app.core.registration:log:52 | [local_20260118040951@example.com] 达到最大重试次数,放弃
+2026-01-18 04:10:08 | INFO     | app.core.registration:execute:104 | [local_20260118040951@example.com] 状态转换: RegistrationState.RETRY -> RegistrationState.FAILED
+2026-01-18 04:10:08 | INFO     | app.core.browser:close:258 | 浏览器已关闭
+2026-01-18 04:10:08 | INFO     | app.core.browser:close:258 | 浏览器已关闭
+2026-01-18 04:10:08 | INFO     | app.services.excel_service:load_accounts:100 | 从 Excel 加载了 1 个账号
+2026-01-18 04:10:08 | INFO     | app.services.excel_service:update_account_status:220 | 更新账号状态: local_20260118040951@example.com -> failed
+2026-01-18 04:10:08 | INFO     | app.services.excel_service:save_accounts:187 | 保存 1 个账号到 Excel: ./data/accounts.xlsx
+2026-01-18 04:11:37 | INFO     | app.utils.logger:setup_logger:65 | 日志系统初始化完成,日志级别: INFO
+2026-01-18 04:11:37 | INFO     | app.services.crypto_service:_setup_cipher:43 | 加密服务初始化成功
+2026-01-18 04:11:38 | INFO     | app.services.crypto_service:_setup_cipher:43 | 加密服务初始化成功
+2026-01-18 04:11:38 | INFO     | app.services.excel_service:load_accounts:100 | 从 Excel 加载了 1 个账号
+2026-01-18 04:11:38 | INFO     | app.services.excel_service:save_accounts:187 | 保存 2 个账号到 Excel: ./data/accounts.xlsx
+2026-01-18 04:11:39 | INFO     | app.services.mail_tm_client:create_account:92 | 创建临时邮箱成功: uujckshdok1@virgilian.com
+2026-01-18 04:11:39 | INFO     | app.api.routes.registration:execute_single_account:59 | 账号 local_20260118041138@example.com 使用临时邮箱注册: uujckshdok1@virgilian.com
+2026-01-18 04:11:39 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 执行状态: init
+2026-01-18 04:11:39 | WARNING  | app.core.proxy_manager:get_proxy:66 | 没有可用代理
+2026-01-18 04:11:41 | INFO     | app.core.browser:start:82 | 浏览器启动成功
+2026-01-18 04:11:41 | INFO     | app.core.registration:execute:104 | [local_20260118041138@example.com] 状态转换: RegistrationState.INIT -> RegistrationState.LOAD_PAGE
+2026-01-18 04:11:41 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 执行状态: load_page
+2026-01-18 04:11:47 | INFO     | app.core.browser:goto:117 | 导航到: https://chat.openai.com/auth/signup
+2026-01-18 04:11:49 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 当前页面: https://chatgpt.com/auth/signup
+2026-01-18 04:11:49 | INFO     | app.core.registration:execute:104 | [local_20260118041138@example.com] 状态转换: RegistrationState.LOAD_PAGE -> RegistrationState.FILL_FORM
+2026-01-18 04:11:49 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 执行状态: fill_form
+2026-01-18 04:11:50 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 使用邮箱注册: uujckshdok1@virgilian.com
+2026-01-18 04:11:55 | ERROR    | app.core.browser:wait_for_selector:165 | 等待元素超时: input[type="email"], 错误: Timeout 5000ms exceeded.
+2026-01-18 04:11:55 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 填写表单失败: Timeout 5000ms exceeded.
+2026-01-18 04:11:55 | INFO     | app.core.registration:execute:104 | [local_20260118041138@example.com] 状态转换: RegistrationState.FILL_FORM -> RegistrationState.RETRY
+2026-01-18 04:11:55 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 执行状态: retry
+2026-01-18 04:11:55 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 重试 1/3
+2026-01-18 04:12:00 | INFO     | app.core.registration:execute:104 | [local_20260118041138@example.com] 状态转换: RegistrationState.RETRY -> RegistrationState.LOAD_PAGE
+2026-01-18 04:12:00 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 执行状态: load_page
+2026-01-18 04:12:03 | INFO     | app.core.browser:goto:117 | 导航到: https://chat.openai.com/auth/signup
+2026-01-18 04:12:05 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 当前页面: https://chatgpt.com/auth/signup
+2026-01-18 04:12:05 | INFO     | app.core.registration:execute:104 | [local_20260118041138@example.com] 状态转换: RegistrationState.LOAD_PAGE -> RegistrationState.FILL_FORM
+2026-01-18 04:12:05 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 执行状态: fill_form
+2026-01-18 04:12:05 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 使用邮箱注册: uujckshdok1@virgilian.com
+2026-01-18 04:12:10 | ERROR    | app.core.browser:wait_for_selector:165 | 等待元素超时: input[type="email"], 错误: Timeout 5000ms exceeded.
+2026-01-18 04:12:10 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 填写表单失败: Timeout 5000ms exceeded.
+2026-01-18 04:12:10 | INFO     | app.core.registration:execute:104 | [local_20260118041138@example.com] 状态转换: RegistrationState.FILL_FORM -> RegistrationState.RETRY
+2026-01-18 04:12:10 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 执行状态: retry
+2026-01-18 04:12:10 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 重试 2/3
+2026-01-18 04:12:15 | INFO     | app.core.registration:execute:104 | [local_20260118041138@example.com] 状态转换: RegistrationState.RETRY -> RegistrationState.LOAD_PAGE
+2026-01-18 04:12:15 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 执行状态: load_page
+2026-01-18 04:12:18 | INFO     | app.core.browser:goto:117 | 导航到: https://chat.openai.com/auth/signup
+2026-01-18 04:12:20 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 当前页面: https://chatgpt.com/auth/signup
+2026-01-18 04:12:20 | INFO     | app.core.registration:execute:104 | [local_20260118041138@example.com] 状态转换: RegistrationState.LOAD_PAGE -> RegistrationState.FILL_FORM
+2026-01-18 04:12:20 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 执行状态: fill_form
+2026-01-18 04:12:20 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 使用邮箱注册: uujckshdok1@virgilian.com
+2026-01-18 04:12:25 | ERROR    | app.core.browser:wait_for_selector:165 | 等待元素超时: input[type="email"], 错误: Timeout 5000ms exceeded.
+2026-01-18 04:12:25 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 填写表单失败: Timeout 5000ms exceeded.
+2026-01-18 04:12:25 | INFO     | app.core.registration:execute:104 | [local_20260118041138@example.com] 状态转换: RegistrationState.FILL_FORM -> RegistrationState.RETRY
+2026-01-18 04:12:25 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 执行状态: retry
+2026-01-18 04:12:25 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 重试 3/3
+2026-01-18 04:12:30 | INFO     | app.core.registration:execute:104 | [local_20260118041138@example.com] 状态转换: RegistrationState.RETRY -> RegistrationState.LOAD_PAGE
+2026-01-18 04:12:30 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 执行状态: load_page
+2026-01-18 04:12:33 | INFO     | app.core.browser:goto:117 | 导航到: https://chat.openai.com/auth/signup
+2026-01-18 04:12:35 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 当前页面: https://chatgpt.com/auth/signup
+2026-01-18 04:12:35 | INFO     | app.core.registration:execute:104 | [local_20260118041138@example.com] 状态转换: RegistrationState.LOAD_PAGE -> RegistrationState.FILL_FORM
+2026-01-18 04:12:35 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 执行状态: fill_form
+2026-01-18 04:12:35 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 使用邮箱注册: uujckshdok1@virgilian.com
+2026-01-18 04:12:40 | ERROR    | app.core.browser:wait_for_selector:165 | 等待元素超时: input[type="email"], 错误: Timeout 5000ms exceeded.
+2026-01-18 04:12:40 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 填写表单失败: Timeout 5000ms exceeded.
+2026-01-18 04:12:40 | INFO     | app.core.registration:execute:104 | [local_20260118041138@example.com] 状态转换: RegistrationState.FILL_FORM -> RegistrationState.RETRY
+2026-01-18 04:12:40 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 执行状态: retry
+2026-01-18 04:12:40 | INFO     | app.core.registration:log:52 | [local_20260118041138@example.com] 达到最大重试次数,放弃
+2026-01-18 04:12:40 | INFO     | app.core.registration:execute:104 | [local_20260118041138@example.com] 状态转换: RegistrationState.RETRY -> RegistrationState.FAILED
+2026-01-18 04:12:41 | INFO     | app.core.browser:close:258 | 浏览器已关闭
+2026-01-18 04:12:41 | INFO     | app.core.browser:close:258 | 浏览器已关闭
+2026-01-18 04:12:41 | INFO     | app.services.excel_service:load_accounts:100 | 从 Excel 加载了 2 个账号
+2026-01-18 04:12:41 | INFO     | app.services.excel_service:update_account_status:220 | 更新账号状态: local_20260118041138@example.com -> failed
+2026-01-18 04:12:41 | INFO     | app.services.excel_service:save_accounts:187 | 保存 2 个账号到 Excel: ./data/accounts.xlsx
+2026-01-18 04:13:47 | INFO     | app.utils.logger:setup_logger:65 | 日志系统初始化完成,日志级别: INFO
+2026-01-18 04:13:47 | INFO     | app.services.crypto_service:_setup_cipher:43 | 加密服务初始化成功
+2026-01-18 04:13:48 | INFO     | app.services.crypto_service:_setup_cipher:43 | 加密服务初始化成功
+2026-01-18 04:13:48 | INFO     | app.services.excel_service:load_accounts:100 | 从 Excel 加载了 2 个账号
+2026-01-18 04:13:48 | INFO     | app.services.excel_service:save_accounts:187 | 保存 3 个账号到 Excel: ./data/accounts.xlsx
+2026-01-18 04:13:49 | INFO     | app.services.mail_tm_client:create_account:92 | 创建临时邮箱成功: up23el1rqac@virgilian.com
+2026-01-18 04:13:49 | INFO     | app.api.routes.registration:execute_single_account:59 | 账号 local_20260118041348@example.com 使用临时邮箱注册: up23el1rqac@virgilian.com
+2026-01-18 04:13:49 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 执行状态: init
+2026-01-18 04:13:49 | WARNING  | app.core.proxy_manager:get_proxy:66 | 没有可用代理
+2026-01-18 04:13:50 | INFO     | app.core.browser:start:82 | 浏览器启动成功
+2026-01-18 04:13:50 | INFO     | app.core.registration:execute:105 | [local_20260118041348@example.com] 状态转换: RegistrationState.INIT -> RegistrationState.LOAD_PAGE
+2026-01-18 04:13:50 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 执行状态: load_page
+2026-01-18 04:13:57 | INFO     | app.core.browser:goto:117 | 导航到: https://chat.openai.com/auth/signup
+2026-01-18 04:13:59 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 当前页面: https://chatgpt.com/auth/signup
+2026-01-18 04:13:59 | INFO     | app.core.registration:execute:105 | [local_20260118041348@example.com] 状态转换: RegistrationState.LOAD_PAGE -> RegistrationState.FILL_FORM
+2026-01-18 04:13:59 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 执行状态: fill_form
+2026-01-18 04:13:59 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 使用邮箱注册: up23el1rqac@virgilian.com
+2026-01-18 04:14:14 | INFO     | app.core.browser:take_screenshot:141 | 截图已保存: screenshots\signup_email_not_found_local_20260118041348@example.com.png
+2026-01-18 04:14:14 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 填写表单失败: 未找到邮箱输入框
+2026-01-18 04:14:14 | INFO     | app.core.registration:execute:105 | [local_20260118041348@example.com] 状态转换: RegistrationState.FILL_FORM -> RegistrationState.RETRY
+2026-01-18 04:14:14 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 执行状态: retry
+2026-01-18 04:14:14 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 重试 1/3
+2026-01-18 04:14:19 | INFO     | app.core.registration:execute:105 | [local_20260118041348@example.com] 状态转换: RegistrationState.RETRY -> RegistrationState.LOAD_PAGE
+2026-01-18 04:14:19 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 执行状态: load_page
+2026-01-18 04:14:22 | INFO     | app.core.browser:goto:117 | 导航到: https://chat.openai.com/auth/signup
+2026-01-18 04:14:24 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 当前页面: https://chatgpt.com/auth/signup
+2026-01-18 04:14:24 | INFO     | app.core.registration:execute:105 | [local_20260118041348@example.com] 状态转换: RegistrationState.LOAD_PAGE -> RegistrationState.FILL_FORM
+2026-01-18 04:14:24 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 执行状态: fill_form
+2026-01-18 04:14:24 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 使用邮箱注册: up23el1rqac@virgilian.com
+2026-01-18 04:14:40 | INFO     | app.core.browser:take_screenshot:141 | 截图已保存: screenshots\signup_email_not_found_local_20260118041348@example.com.png
+2026-01-18 04:14:40 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 填写表单失败: 未找到邮箱输入框
+2026-01-18 04:14:40 | INFO     | app.core.registration:execute:105 | [local_20260118041348@example.com] 状态转换: RegistrationState.FILL_FORM -> RegistrationState.RETRY
+2026-01-18 04:14:40 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 执行状态: retry
+2026-01-18 04:14:40 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 重试 2/3
+2026-01-18 04:14:45 | INFO     | app.core.registration:execute:105 | [local_20260118041348@example.com] 状态转换: RegistrationState.RETRY -> RegistrationState.LOAD_PAGE
+2026-01-18 04:14:45 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 执行状态: load_page
+2026-01-18 04:14:48 | INFO     | app.core.browser:goto:117 | 导航到: https://chat.openai.com/auth/signup
+2026-01-18 04:14:50 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 当前页面: https://chatgpt.com/auth/signup
+2026-01-18 04:14:50 | INFO     | app.core.registration:execute:105 | [local_20260118041348@example.com] 状态转换: RegistrationState.LOAD_PAGE -> RegistrationState.FILL_FORM
+2026-01-18 04:14:50 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 执行状态: fill_form
+2026-01-18 04:14:50 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 使用邮箱注册: up23el1rqac@virgilian.com
+2026-01-18 04:15:06 | INFO     | app.core.browser:take_screenshot:141 | 截图已保存: screenshots\signup_email_not_found_local_20260118041348@example.com.png
+2026-01-18 04:15:06 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 填写表单失败: 未找到邮箱输入框
+2026-01-18 04:15:06 | INFO     | app.core.registration:execute:105 | [local_20260118041348@example.com] 状态转换: RegistrationState.FILL_FORM -> RegistrationState.RETRY
+2026-01-18 04:15:06 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 执行状态: retry
+2026-01-18 04:15:06 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 重试 3/3
+2026-01-18 04:15:11 | INFO     | app.core.registration:execute:105 | [local_20260118041348@example.com] 状态转换: RegistrationState.RETRY -> RegistrationState.LOAD_PAGE
+2026-01-18 04:15:11 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 执行状态: load_page
+2026-01-18 04:15:13 | INFO     | app.core.browser:goto:117 | 导航到: https://chat.openai.com/auth/signup
+2026-01-18 04:15:15 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 当前页面: https://chatgpt.com/auth/signup
+2026-01-18 04:15:15 | INFO     | app.core.registration:execute:105 | [local_20260118041348@example.com] 状态转换: RegistrationState.LOAD_PAGE -> RegistrationState.FILL_FORM
+2026-01-18 04:15:15 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 执行状态: fill_form
+2026-01-18 04:15:16 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 使用邮箱注册: up23el1rqac@virgilian.com
+2026-01-18 04:15:31 | INFO     | app.core.browser:take_screenshot:141 | 截图已保存: screenshots\signup_email_not_found_local_20260118041348@example.com.png
+2026-01-18 04:15:31 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 填写表单失败: 未找到邮箱输入框
+2026-01-18 04:15:31 | INFO     | app.core.registration:execute:105 | [local_20260118041348@example.com] 状态转换: RegistrationState.FILL_FORM -> RegistrationState.RETRY
+2026-01-18 04:15:31 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 执行状态: retry
+2026-01-18 04:15:31 | INFO     | app.core.registration:log:53 | [local_20260118041348@example.com] 达到最大重试次数,放弃
+2026-01-18 04:15:31 | INFO     | app.core.registration:execute:105 | [local_20260118041348@example.com] 状态转换: RegistrationState.RETRY -> RegistrationState.FAILED
+2026-01-18 04:15:32 | INFO     | app.core.browser:close:258 | 浏览器已关闭
+2026-01-18 04:15:32 | INFO     | app.core.browser:close:258 | 浏览器已关闭
+2026-01-18 04:15:32 | INFO     | app.services.excel_service:load_accounts:100 | 从 Excel 加载了 3 个账号
+2026-01-18 04:15:32 | INFO     | app.services.excel_service:update_account_status:220 | 更新账号状态: local_20260118041348@example.com -> failed
+2026-01-18 04:15:32 | INFO     | app.services.excel_service:save_accounts:187 | 保存 3 个账号到 Excel: ./data/accounts.xlsx

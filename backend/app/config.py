@@ -23,6 +23,19 @@ class Settings(BaseSettings):
     CAPTCHA_SERVICE: str = "2captcha"  # 2captcha 或 yescaptcha
     CAPTCHA_API_KEY: str = ""
 
+    # 注册方式配置
+    REGISTRATION_MODE: str = "microsoft"  # microsoft 或 openai_email
+
+    # 邮箱验证配置
+    EMAIL_PROVIDER: str = "none"  # none 或 mailtm
+    MAIL_TM_BASE_URL: str = "https://api.mail.tm"
+    MAIL_TM_DOMAIN_PAGE: int = 1
+    EMAIL_API_TIMEOUT: int = 30  # 秒
+    EMAIL_VERIFY_TIMEOUT: int = 180  # 秒
+    EMAIL_POLL_INTERVAL: int = 3  # 秒
+    EMAIL_SUBJECT_KEYWORDS: str = "OpenAI,verify,verification,confirm"
+    EMAIL_SENDER_KEYWORDS: str = "openai.com"
+
     # 浏览器配置
     HEADLESS_MODE: bool = True
     BROWSER_TIMEOUT: int = 30000  # 毫秒

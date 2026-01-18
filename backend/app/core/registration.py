@@ -1,13 +1,18 @@
 """注册流程状态机模块"""
 import asyncio
+import html as html_lib
+import re
+import time
 from enum import Enum
-from typing import Optional, Callable
+from typing import Optional, Callable, List
 from dataclasses import dataclass
 from datetime import datetime
 from app.models.enums import RegistrationStatus
 from app.core.browser import BrowserService
 from app.core.captcha_solver import CaptchaSolver
 from app.core.proxy_manager import ProxyManager
+from app.services.mail_tm_client import MailTmClient, MailTmAccount
+from app.config import settings
 from app.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -31,9 +36,12 @@ class RegistrationContext:
     """注册上下文"""
     email: str
     password: str
+    signup_email: str
     browser: BrowserService
     captcha_solver: Optional[CaptchaSolver]
     proxy_manager: Optional[ProxyManager]
+    temp_mail_client: Optional[MailTmClient]
+    temp_mail_account: Optional[MailTmAccount]
     task_id: str
     max_retries: int = 3
     current_retry: int = 0
@@ -136,7 +144,12 @@ class RegistrationStateMachine:
             page = await self.context.browser.get_page()
 
             # 访问 GPT 注册页面
-            await self.context.browser.goto(page, 'https://chat.openai.com/auth/login')
+            target_url = (
+                "https://chat.openai.com/auth/signup"
+                if settings.REGISTRATION_MODE.lower() == "openai_email"
+                else "https://chat.openai.com/auth/login"
+            )
+            await self.context.browser.goto(page, target_url)
 
             # 等待页面加载
             await asyncio.sleep(2)
@@ -156,6 +169,11 @@ class RegistrationStateMachine:
         """填写表单"""
         try:
             page = await self.context.browser.get_page()
+
+            if settings.REGISTRATION_MODE.lower() == "openai_email":
+                await self.context.log("INFO", f"使用邮箱注册: {self.context.signup_email}")
+                await self._fill_openai_signup(page)
+                return RegistrationState.SUBMIT_FORM
 
             # 查找微软登录按钮
             await asyncio.sleep(1)
@@ -195,7 +213,7 @@ class RegistrationStateMachine:
 
         # 等待邮箱输入框
         await self.context.browser.wait_for_selector(page, 'input[type="email"]', timeout=5000)
-        await page.fill('input[type="email"]', self.context.email)
+        await page.fill('input[type="email"]', self.context.signup_email)
         await page.click('input[type="submit"]')
 
         await asyncio.sleep(2)
@@ -206,6 +224,128 @@ class RegistrationStateMachine:
         await page.click('input[type="submit"]')
 
         await asyncio.sleep(2)
+
+    async def _fill_openai_signup(self, page):
+        """填写 OpenAI 邮箱注册表单"""
+        email_selectors = [
+            'input[type="email"]',
+            'input[name="username"]',
+            'input[id="email"]',
+            'input[id="username"]',
+            'input[autocomplete="username"]'
+        ]
+        password_selectors = [
+            'input[type="password"]',
+            'input[name="password"]',
+            'input[id="password"]',
+            'input[autocomplete="current-password"]',
+            'input[autocomplete="new-password"]'
+        ]
+
+        # 邮箱输入
+        email_input = await self._wait_for_any_element(page, email_selectors, timeout_ms=15000)
+        if not email_input:
+            await self._capture_form_debug("signup_email_not_found")
+            raise TimeoutError("未找到邮箱输入框")
+
+        await email_input.fill(self.context.signup_email)
+        clicked = await self._click_first_available(page, [
+            'button:has-text("Continue")',
+            'button:has-text("Sign up")',
+            'button:has-text("Create account")',
+            'button[type="submit"]'
+        ])
+        if not clicked:
+            await page.keyboard.press("Enter")
+
+        await asyncio.sleep(2)
+
+        # 密码输入
+        password_input = await self._wait_for_any_element(page, password_selectors, timeout_ms=15000)
+        if not password_input:
+            await self._capture_form_debug("signup_password_not_found")
+            raise TimeoutError("未找到密码输入框")
+
+        await password_input.fill(self.context.password)
+        clicked = await self._click_first_available(page, [
+            'button:has-text("Continue")',
+            'button:has-text("Sign up")',
+            'button:has-text("Create account")',
+            'button[type="submit"]'
+        ])
+        if not clicked:
+            await page.keyboard.press("Enter")
+
+        await asyncio.sleep(2)
+
+    async def _click_first_available(self, page, selectors: List[str]) -> bool:
+        for selector in selectors:
+            element = await page.query_selector(selector)
+            if element:
+                await element.click()
+                return True
+        return False
+
+    async def _wait_for_any_element(self, page, selectors: List[str], timeout_ms: int):
+        end_time = time.monotonic() + timeout_ms / 1000
+        while time.monotonic() < end_time:
+            element = await self._find_element(page, selectors)
+            if element:
+                return element
+            await asyncio.sleep(0.5)
+        return None
+
+    async def _find_element(self, page, selectors: List[str]):
+        for selector in selectors:
+            element = await page.query_selector(selector)
+            if element:
+                return element
+
+        for frame in page.frames:
+            if frame == page.main_frame:
+                continue
+            for selector in selectors:
+                element = await frame.query_selector(selector)
+                if element:
+                    return element
+
+        return None
+
+    async def _is_email_verification_page(self, page) -> bool:
+        current_url = page.url
+        if "verify" in current_url or "confirm" in current_url:
+            return True
+
+        code_selectors = [
+            'input[autocomplete="one-time-code"]',
+            'input[name="otp"]',
+            'input[name="code"]',
+            'input[inputmode="numeric"]',
+            'input[type="tel"]'
+        ]
+        for selector in code_selectors:
+            if await page.query_selector(selector):
+                return True
+
+        text_selectors = [
+            'text="Check your email"',
+            'text="verification code"',
+            'text="Enter the code"'
+        ]
+        for selector in text_selectors:
+            if await page.query_selector(selector):
+                return True
+
+        return False
+
+    async def _capture_form_debug(self, filename: str):
+        try:
+            await self.context.browser.take_screenshot(
+                await self.context.browser.get_page(),
+                f"{filename}_{self.context.email}.png"
+            )
+        except Exception:
+            pass
 
     async def _handle_solve_captcha(self) -> RegistrationState:
         """解决验证码"""
@@ -273,7 +413,7 @@ class RegistrationStateMachine:
                 return RegistrationState.COMPLETE
 
             # 检查是否需要邮箱验证
-            if 'verify' in current_url or 'confirm' in current_url:
+            if await self._is_email_verification_page(page):
                 return RegistrationState.VERIFY_EMAIL
 
             # 检查错误信息
@@ -302,10 +442,119 @@ class RegistrationStateMachine:
             return RegistrationState.RETRY
 
     async def _handle_verify_email(self) -> RegistrationState:
-        """验证邮箱(需要人工介入或自动读取邮箱)"""
-        self.context.error_message = "需要人工验证邮箱"
-        await self.context.log("WARNING", self.context.error_message)
-        return RegistrationState.FAILED
+        """验证邮箱(自动读取临时邮箱)"""
+        if not self.context.temp_mail_client or not self.context.temp_mail_account:
+            self.context.error_message = "未配置临时邮箱服务"
+            await self.context.log("WARNING", self.context.error_message)
+            return RegistrationState.FAILED
+
+        try:
+            await self.context.log("INFO", "开始获取邮箱验证码")
+
+            subject_keywords = self._split_keywords(settings.EMAIL_SUBJECT_KEYWORDS)
+            sender_keywords = self._split_keywords(settings.EMAIL_SENDER_KEYWORDS)
+
+            message = await self.context.temp_mail_client.wait_for_message(
+                token=self.context.temp_mail_account.token,
+                timeout=settings.EMAIL_VERIFY_TIMEOUT,
+                poll_interval=settings.EMAIL_POLL_INTERVAL,
+                subject_keywords=subject_keywords,
+                sender_keywords=sender_keywords
+            )
+
+            content = self._collect_message_content(message)
+            verification_link = self._extract_verification_link(content, sender_keywords)
+            verification_code = self._extract_verification_code(content)
+
+            page = await self.context.browser.get_page()
+
+            if verification_link:
+                await self.context.log("INFO", "检测到验证链接")
+                await self.context.browser.goto(page, verification_link)
+                await asyncio.sleep(2)
+            elif verification_code:
+                await self.context.log("INFO", "检测到验证码,准备填充")
+                await self._fill_verification_code(page, verification_code)
+                await asyncio.sleep(2)
+            else:
+                self.context.error_message = "未从邮件中解析到验证码或验证链接"
+                await self.context.log("ERROR", self.context.error_message)
+                return RegistrationState.FAILED
+
+            if await self._is_email_verification_page(page):
+                self.context.error_message = "邮箱验证提交后仍停留在验证页面"
+                await self.context.log("ERROR", self.context.error_message)
+                return RegistrationState.RETRY
+
+            return RegistrationState.COMPLETE
+
+        except Exception as e:
+            self.context.error_message = f"邮箱验证失败: {str(e)}"
+            await self.context.log("ERROR", self.context.error_message)
+            return RegistrationState.RETRY
+
+    async def _fill_verification_code(self, page, code: str):
+        code_inputs = await page.query_selector_all(
+            'input[autocomplete="one-time-code"], '
+            'input[name="code"], '
+            'input[inputmode="numeric"], '
+            'input[type="tel"]'
+        )
+
+        if len(code_inputs) >= len(code):
+            for index, digit in enumerate(code):
+                await code_inputs[index].fill(digit)
+        else:
+            for selector in [
+                'input[autocomplete="one-time-code"]',
+                'input[name="code"]',
+                'input[inputmode="numeric"]',
+                'input[type="tel"]'
+            ]:
+                element = await page.query_selector(selector)
+                if element:
+                    await element.fill(code)
+                    break
+
+        await self._click_first_available(page, [
+            'button:has-text("Continue")',
+            'button:has-text("Verify")',
+            'button:has-text("Submit")',
+            'button[type="submit"]'
+        ])
+
+    def _collect_message_content(self, message: dict) -> str:
+        text = message.get("text") or ""
+        html_content = message.get("html") or ""
+
+        if isinstance(html_content, list):
+            html_content = "\n".join(html_content)
+
+        combined = "\n".join([text, html_content])
+        return html_lib.unescape(combined)
+
+    def _extract_verification_code(self, content: str) -> Optional[str]:
+        match = re.search(r"\b(\d{6})\b", content)
+        return match.group(1) if match else None
+
+    def _extract_verification_link(
+        self,
+        content: str,
+        sender_keywords: List[str]
+    ) -> Optional[str]:
+        urls = re.findall(r"https?://[^\s\"'<>()]+", content)
+        if not urls:
+            return None
+
+        for url in urls:
+            url_lower = url.lower()
+            if any(keyword in url_lower for keyword in sender_keywords):
+                return url
+
+        return urls[0]
+
+    def _split_keywords(self, raw: str) -> List[str]:
+        return [item.strip().lower() for item in raw.split(",") if item.strip()]
 
     async def _handle_complete(self) -> RegistrationState:
         """完成状态"""

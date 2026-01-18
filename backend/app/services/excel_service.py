@@ -130,6 +130,11 @@ class ExcelService:
 
             # 写入数据
             for row_idx, account in enumerate(accounts, 2):
+                status_value = (
+                    account.status.value
+                    if hasattr(account.status, "value")
+                    else str(account.status)
+                )
                 self.sheet.cell(row=row_idx, column=1, value=account.id)
                 self.sheet.cell(row=row_idx, column=2, value=account.email)
                 self.sheet.cell(row=row_idx, column=3, value=self.crypto.encrypt(account.password))
@@ -139,7 +144,7 @@ class ExcelService:
                 self.sheet.cell(row=row_idx, column=7, value=account.proxy_username)
                 self.sheet.cell(row=row_idx, column=8,
                                 value=self.crypto.encrypt(account.proxy_password) if account.proxy_password else None)
-                self.sheet.cell(row=row_idx, column=9, value=account.status.value)
+                self.sheet.cell(row=row_idx, column=9, value=status_value)
                 self.sheet.cell(row=row_idx, column=10, value=account.gpt_account_id)
                 self.sheet.cell(row=row_idx, column=11, value=account.gpt_email)
                 self.sheet.cell(row=row_idx, column=12, value=account.error_message)
@@ -150,13 +155,13 @@ class ExcelService:
 
                 # 根据状态设置单元格背景色
                 status_cell = self.sheet.cell(row=row_idx, column=9)
-                if account.status == RegistrationStatus.SUCCESS:
+                if status_value == RegistrationStatus.SUCCESS.value:
                     status_cell.fill = PatternFill(start_color="90EE90", end_color="90EE90", fill_type="solid")
-                elif account.status == RegistrationStatus.FAILED:
+                elif status_value == RegistrationStatus.FAILED.value:
                     status_cell.fill = PatternFill(start_color="FFB6C1", end_color="FFB6C1", fill_type="solid")
-                elif account.status == RegistrationStatus.IN_PROGRESS:
+                elif status_value == RegistrationStatus.IN_PROGRESS.value:
                     status_cell.fill = PatternFill(start_color="87CEEB", end_color="87CEEB", fill_type="solid")
-                elif account.status == RegistrationStatus.PENDING:
+                elif status_value == RegistrationStatus.PENDING.value:
                     status_cell.fill = PatternFill(start_color="F0F0F0", end_color="F0F0F0", fill_type="solid")
 
             # 自动调整列宽

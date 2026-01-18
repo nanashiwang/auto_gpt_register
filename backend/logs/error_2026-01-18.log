@@ -1,0 +1,14 @@
+2026-01-18 04:09:13 | ERROR    | app.services.excel_service:save_accounts:185 | 保存 Excel 失败: 'str' object has no attribute 'value'
+2026-01-18 04:09:53 | ERROR    | app.core.browser:start:86 | 浏览器启动失败: Executable doesn't exist at C:\Users\29877\AppData\Local\ms-playwright\chromium-1091\chrome-win\chrome.exe
+╔════════════════════════════════════════════════════════════╗
+║ Looks like Playwright was just installed or updated.       ║
+║ Please run the following command to download new browsers: ║
+║                                                            ║
+║     playwright install                                     ║
+║                                                            ║
+║ <3 Playwright Team                                         ║
+╚════════════════════════════════════════════════════════════╝
+2026-01-18 04:11:55 | ERROR    | app.core.browser:wait_for_selector:165 | 等待元素超时: input[type="email"], 错误: Timeout 5000ms exceeded.
+2026-01-18 04:12:10 | ERROR    | app.core.browser:wait_for_selector:165 | 等待元素超时: input[type="email"], 错误: Timeout 5000ms exceeded.
+2026-01-18 04:12:25 | ERROR    | app.core.browser:wait_for_selector:165 | 等待元素超时: input[type="email"], 错误: Timeout 5000ms exceeded.
+2026-01-18 04:12:40 | ERROR    | app.core.browser:wait_for_selector:165 | 等待元素超时: input[type="email"], 错误: Timeout 5000ms exceeded.

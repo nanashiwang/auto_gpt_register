@@ -59,7 +59,7 @@ class ProxyConfig(BaseModel):
     id: Optional[int] = None
     host: str = Field(..., description="代理主机地址")
     port: int = Field(..., ge=1, le=65535, description="代理端口")
-    protocol: str = Field(default="http", regex="^(http|https|socks5)$", description="代理协议")
+    protocol: str = Field(default="http", pattern="^(http|https|socks5)$", description="代理协议")
     username: Optional[str] = Field(None, description="代理用户名")
     password: Optional[str] = Field(None, description="代理密码(加密)")
     is_active: bool = Field(default=True, description="是否启用")

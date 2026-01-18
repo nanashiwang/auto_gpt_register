@@ -64,6 +64,19 @@ ENCRYPTION_KEY=your-secret-key-here-change-this-in-production
 # 验证码服务 API Key
 CAPTCHA_SERVICE=2captcha
 CAPTCHA_API_KEY=your-captcha-api-key-here
+
+# 注册方式 (microsoft / openai_email)
+REGISTRATION_MODE=openai_email
+
+# 邮箱验证(临时邮箱 mail.tm)
+EMAIL_PROVIDER=mailtm
+MAIL_TM_BASE_URL=https://api.mail.tm
+MAIL_TM_DOMAIN_PAGE=1
+EMAIL_API_TIMEOUT=30
+EMAIL_VERIFY_TIMEOUT=180
+EMAIL_POLL_INTERVAL=3
+EMAIL_SUBJECT_KEYWORDS=OpenAI,verify,verification,confirm
+EMAIL_SENDER_KEYWORDS=openai.com
 ```
 
 ### 4. 创建数据目录
